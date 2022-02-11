@@ -1,4 +1,3 @@
-import { initializeApp } from 'firebase/app';
 import {
   getAuth,
   signInWithPopup,
@@ -6,21 +5,37 @@ import {
   GithubAuthProvider,
 } from 'firebase/auth';
 
-const config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_DATABASE_URL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-};
-const firebaseApp = initializeApp(config);
-
 class AuthService {
+  constructor() {
+    this.firebaseAuth = getAuth();
+    this.googleProvider = new GoogleAuthProvider();
+    this.githubProvider = new GithubAuthProvider();
+  }
+
   login(providerName) {
-    let provider;
-    if (providerName === 'Google') provider = new GoogleAuthProvider();
-    if (providerName === 'Github') provider = new GithubAuthProvider();
-    const auth = getAuth();
-    return signInWithPopup(auth, provider);
+    const authProvider = this.getProvider(providerName);
+    return signInWithPopup(this.firebaseAuth, authProvider);
+  }
+
+  logout() {
+    this.firebaseAuth.signOut();
+  }
+
+  onAuthChange(onUserChanged) {
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      onUserChanged(user);
+    });
+  }
+
+  getProvider(providerName) {
+    switch (providerName) {
+      case 'Google':
+        return this.googleProvider;
+      case 'Github':
+        return this.githubProvider;
+      default:
+        throw new Error(`not supported provider: ${providerName}`);
+    }
   }
 }
 
