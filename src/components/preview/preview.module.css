@@ -1,4 +1,14 @@
 .preview {
   flex-basis: 50%;
-  background-color: blueviolet;
+  background-color: skyblue;
+}
+
+.title {
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

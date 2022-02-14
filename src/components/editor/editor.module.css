@@ -1,4 +1,9 @@
 .editor {
   flex-basis: 50%;
-  background-color: chocolate;
+  background-color: white;
+  padding: 0.5em 2em;
+}
+
+.editor h1 {
+  text-align: center;
 }
