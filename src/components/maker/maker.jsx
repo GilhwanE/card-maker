@@ -58,12 +58,7 @@ const Maker = ({ authService }) => {
     });
   });
 
-  const addCard = (card) => {
-    const updated = [...cards, card];
-    setCards(updated);
-  };
-
-  const updateCard = (card) => {
+  const CreateOrUpdate = (card) => {
     const updated = { ...cards }; // 기존에 있는 cards를 복사
     updated[card.id] = card; // 업데이트에 있는 id 키를 이용하여 그 오브젝트 전체를 card로 변경
     setCards(updated);
@@ -83,8 +78,8 @@ const Maker = ({ authService }) => {
       <div className={styles.container}>
         <Editor
           cards={cards}
-          addCard={addCard}
-          updateCard={updateCard}
+          addCard={CreateOrUpdate}
+          updateCard={CreateOrUpdate}
           deletedCard={deletedCard}
         />
         <Preview cards={cards} />
