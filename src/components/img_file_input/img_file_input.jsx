@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useRef } from 'react/cjs/react.development';
-import ImageUploader from '../../service/image_uploader';
+import React, { useState, useRef } from 'react';
 import styles from './img_file_input.module.css';
 
 const ImageFileInput = ({ imageUploader, name, onFileChange }) => {
