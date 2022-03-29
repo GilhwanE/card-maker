@@ -5,7 +5,6 @@ import Header from '../header/header';
 import styles from './maker.module.css';
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
-import CardRepository from '../../service/card_repository';
 
 const Maker = ({ FileInput, authService, cardRepository }) => {
   // preview , editor에 뿌려줄 데이터를 정해야한다. preview와 editor의 상위컴포넌트이기 때문에 여기에 작성
@@ -23,7 +22,6 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
     authService.onAuthChange((user) => {
       if (user) {
         setUserId(user.uid);
-        console.log(userId);
       } else {
         navigate('/');
       }
@@ -37,10 +35,11 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
       const stopSync = cardRepository.syncCards(userId, (cards) => {
         setCards(cards);
       });
+
+      return () => {
+        stopSync();
+      };
     }
-    return () => {
-      stopSync();
-    };
   }, [userId]);
 
   const CreateOrUpdate = (card) => {

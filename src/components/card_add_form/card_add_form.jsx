@@ -35,13 +35,13 @@ const CardAddForm = ({ FileInput, onAdd }) => {
       fileName: file.fileName || '',
       fileURL: file.fileURL || '',
     };
-    // formRef.current.reset();
+    formRef.current.reset();
     setFIle({ fileName: null, fileURL: null });
     onAdd(card);
   };
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} ref={formRef}>
       <input
         ref={nameRef}
         className={styles.input}
@@ -90,7 +90,7 @@ const CardAddForm = ({ FileInput, onAdd }) => {
         <FileInput name={file.fileName} onFileChange={onFileChange} />
       </div>
 
-      <Button name="Add" onClick={onSubmit} />
+      <Button name="Add" type="button" onClick={onSubmit} />
     </form>
   );
 };

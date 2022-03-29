@@ -15,7 +15,7 @@ const Card = ({ card }) => {
         <p className={styles.title}>{title}</p>
         <p className={styles.email}>{email}</p>
         <p className={styles.message}>{message}</p>
-        <p className={styles.theme}>{theme}</p>
+        {/* <p className={styles.theme}>{theme}</p> */}
         <p className={styles.fileName}>{fileName}</p>
       </div>
     </li>
